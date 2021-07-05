@@ -5,7 +5,7 @@ Decisive Decisions
 Whether it's deciding how to spend a budget, deciding on the next TV series to binge, or even deciding on a hackathon submission idea, there are lots of instances where it can be difficult to decide on something. This is even more apparent when you're working in a group.
 We decided to focus on productivity and quality of life, so we were inspired to create a project to make the decision-making process more efficient in these kinds of circumstances. Specifically, we wanted to focus on the comparison and organization of brainstorming ideas and solutions. This way, all members of a group can have their ideas heard and reduce conflict/disputes.
 
-## What this project does
+## What Decisive Decisions does
 Decisive Decisions is a webapp that allows users to compile all of their different ideas into a virtual list. From there, users can add in a description and information on what resources would be required for each idea. Additionally, Decisive Decisions lets users compare pros and cons of each idea.
 
 Finally, with each of the user's ideas fully explored and organized, they can select which idea they would like to use through Decisive Decisions' voting system.
