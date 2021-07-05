@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+		<title>Vote</title>
+		<link href="styles.css" rel="stylesheet" type="text/css" />
+		<link rel="shortcut icon" href="https://wisefish99.qoom.space/DecisiveDecisions2/lightb.png">
+
+		<style>
+			body {
+				background-color: #FFDE59;
+			}
+			.center {
+				background-color: #FFDE59;
+				overflow: hidden;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				height: 100vh;
+				width: 100vw;
+				margin: 0;
+			}
+
+
+			#toptext {
+				margin-top: 30px;
+				padding: 15px;
+				width: 25%;
+				background-color: #F8B347;
+				color: white;
+				text-align: center;
+				font-size: 60px;
+				font-weight: bold;
+				border: none;
+				display: inline;
+				border-radius: 15px
+			}
+
+
+			form {
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+				align-items: center;
+				gap: 10px;
+			}
+
+			label,
+			select,
+			button {
+				font-size: 1.25em;
+				padding: 5px;
+			}
+
+			button {
+				background-color: #024BAC;
+				color: white;
+				border: none;
+				padding: 5px 10px;
+				border-radius: 3px;
+				cursor: pointer;
+			}
+
+			button:hover {
+				background-color: #CEE3E2; color: black;
+			}
+
+			div#results {
+				min-height: 100px;
+				background-color: white;
+				width: 400px;
+				max-height: 75vh;
+				margin-top: 20px;
+				overflow: auto;
+				border-radius: 5px;
+				border: solid 2px #024BAC;
+			}
+
+			div.row {
+				display: flex;
+				flex-direction: row;
+				border-bottom: solid 1px #024BAC;
+				margin: 0px 20px;
+				padding: 20px;
+				align-items: center;
+				justify-content: space-between;
+			}
+
+			div.row:last-child {
+				border-bottom: none;
+			}
+
+			div.emojis {
+				font-size: 24px;
+			}
+
+			div.count {
+				font-size: 48px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<nav>
+			{{#private}}
+				<a href='account'>
+					<img src='{{avatar}}'>
+				</a>
+				<a onclick='logout()'>Logout</a>
+			{{/private}}
+			<a href='index'>Home</a>
+		</nav>
+		<a href="ideas" class="button" style="margin: 10px">Back</a>
+		<script src="script.js" type="module"></script>
+		<br /><br />
+		
+		<br />
+		
+		<center>
+			<h1 id="toptext">Vote</h1>
+			<h2 style="padding: 25px 25px 0px 25px">Vote for your top idea!</h2>
+		</center><br />
+
+
+		<form action='/~/openpoll/open/lunch' method='POST' enctype="multipart/form-data">
+			<label>Which idea is your favorite?</label>
+			<select name='choice'>
+				<option value='1️⃣'>1️⃣ Idea 1</option>
+				<option value='2️⃣'>2️⃣ Idea 2</option>
+				<option value='3️⃣'>3️⃣ Idea 3</option>
+			
+
+			</select>
+			<button>Submit</button>
+			<input type='hidden' name='redirecturl' value='/~/openpoll/vote'>
+		</form>
+		<div id='results'></div>
+
+	
+		<br /><br />
+		<script>
+			async function grabData() {
+				const resp = await fetch('/~/openpoll/open/lunch?all=true')
+				const json = await resp.json();
+				const results = document.querySelector('div');
+
+				// Generate array of emojis from option elements
+				const emojisElements = document.querySelectorAll('option');
+				const arrayOfEmojiElements = [...document.querySelectorAll('option')];
+				const emojis = arrayOfEmojiElements.map(option => option.value);
+
+				// Find the number of times an emoji was chosen
+				const counts = {};
+				emojis.forEach(emoji => {
+					counts[emoji] = json.filter(choice => choice.data.choice === emoji)
+						.length
+				})
+
+				// Convert our counts into an HTML table
+				emojis.forEach(emoji => {
+					const count = counts[emoji];
+					const div = document.createElement('div');
+					const emojis = [];
+					while (emojis.length < count) {
+						emojis.push(emoji);
+					}
+					div.className = 'row'
+					div.innerHTML = `
+			<div class='emojis'>${emojis}</div>
+			<div class='count'>${count}</div>
+		`
+					results.appendChild(div);
+				})
+
+				// results.innerHTML = '<pre>' + JSON.stringify(counts, null, 4) + '</pre>'
+			}
+
+			grabData();
+		</script>
+
+	</body>
+
+</html>

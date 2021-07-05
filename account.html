@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=0.5">
+		<link rel="stylesheet" href="styles.css">
+		<script type="module" src="script.js"></script>
+		<link rel="shortcut icon" type="image/jpg" href="pug.png"/>
+		<title>Sign Up!</title>
+	</head>
+
+	<body>
+		<nav>
+			
+			<a onclick='logout()'>Logout</a>
+			<a href='index'>Home</a>
+			{{#private}}
+			<a href='ideas'>Ideas</a>
+			{{/private}}
+		</nav>
+		<main>
+			{{#private}}
+			<div>
+				<h2>Welcome</h2>
+				<h3>{{username}}</h3>
+				<br>
+				<img src='{{avatar}}'>
+				<br>
+				<a href="ideas" class = "button">Go to Ideas</a>
+			</div>
+			{{/private}}
+			
+			{{^private}}
+				<script>
+					location.href = 'index';
+				</script>
+			{{/private}}
+		</main>
+		<footer>
+			© 2021 Decisive Decisions
+		</footer>
+	</body>
+
+</html>
