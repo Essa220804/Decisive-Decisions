@@ -25,3 +25,6 @@ We are proud of our final product because we were able to create a solution to o
 
 ## What is next for this project
 The next steps for this project would be to add features to be able to edit ideas and descriptions as well as delete options in case users no longer want an idea or theme.
+
+## How to use the code
+You can use our website at: https://wisefish99.qoom.space/~/DecisiveDecisions2/index
